@@ -15,11 +15,7 @@
     "prepare": "husky && npm run build",
     "prepublishOnly": "npm run build",
     "test": "vitest",
-    "test:generation": "tsx scripts/test-generation.ts",
-    "test:charts": "node --test --import=tsx test/generation/test-runner.ts",
-    "test:charts:basic": "node --test --import=tsx test/generation/test-runner.ts --grep='Basic Chart Tests'",
-    "test:charts:stress": "node --test --import=tsx test/generation/test-runner.ts --grep='Stress Tests'",
-    "test:charts:property": "node --test --import=tsx test/generation/test-runner.ts --grep='Property Combination Tests'",
+    "test:generation": "node --test --import=tsx test/generation/test-runner.ts",
     "lint": "biome check src/",
     "lint:fix": "biome check --write src/",
     "format": "biome format --write src/"
