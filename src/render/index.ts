@@ -76,7 +76,7 @@ function validateChartOptions(
   }
 
   // Chart-specific validation
-  const { data, width, height } = options;
+  const { data, categories, series, width, height } = options;
 
   // Validate dimensions
   if (width !== undefined && (typeof width !== "number" || width <= 0)) {
@@ -99,14 +99,21 @@ function validateChartOptions(
     "histogram",
     "treemap",
     "word-cloud",
-    "dual-axes",
     "network-graph",
     "flow-diagram",
     "mind-map",
     "fishbone-diagram",
   ];
 
-  if (
+  // Special validation for dual-axes chart
+  if (type === "dual-axes") {
+    if (!categories || !Array.isArray(categories) || categories.length === 0) {
+      throw new Error("Dual-axes chart requires non-empty categories");
+    }
+    if (!series || !Array.isArray(series) || series.length === 0) {
+      throw new Error("Dual-axes chart requires non-empty series");
+    }
+  } else if (
     chartsRequiringData.includes(type) &&
     (!data || (Array.isArray(data) && data.length === 0))
   ) {
